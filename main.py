@@ -1,6 +1,6 @@
 import cv2
 import time
-
+from cvzone.HandTrackingModule import HandDetector
 ################################
 wCam, hCam = 2000, 2000
 ################################
@@ -10,8 +10,12 @@ cap.set(3, wCam)
 cap.set(4, hCam)
 pTime = 0
 
+detector = HandDetector(maxHands=1)
+
 while True:
     success, img = cap.read()
+    detector.findHands(img)
+
     cTime = time.time()
     fps = 1 / (cTime - pTime)
     pTime = cTime
